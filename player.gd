@@ -25,14 +25,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("move_back"):
 		direction.z += 1
 
-
-			
-		
 	# Normalize direction vector if needed
 	if direction != Vector3.ZERO:
 		direction =direction.normalized()
 		$Pivot.look_at(position + direction, Vector3.UP)
-		
+	
+	set_animation_speed(direction)
 
 	# Ground velocity
 	target_velocity.x = direction.x * speed
@@ -57,6 +55,8 @@ func _physics_process(delta: float) -> void:
 			target_velocity.y = bounce_impluse
 			break
 
+	$Pivot.rotation.x = PI / 6 * velocity.y / jump_impulse
+
 	# Actually apply movement
 	velocity = target_velocity
 	move_and_slide()
@@ -68,3 +68,9 @@ func die():
 func _on_mob_detector_body_entered(_body: Node3D) -> void:
 	# OMG I DIE 
 	die()
+
+func set_animation_speed(direction:Vector3) -> void:
+	if direction != Vector3.ZERO && is_on_floor():
+		$AnimationPlayer.speed_scale = 4
+	else:
+		$AnimationPlayer.speed_scale = 1
