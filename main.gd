@@ -14,7 +14,8 @@ func _process(_delta: float) -> void:
 
 func _on_mob_timer_timeout() -> void:
 	spawn_mob()
-
+	
+	
 func spawn_mob() -> void:
 	if $Player != null:
 		var mob = mob_scene.instantiate()
@@ -26,9 +27,10 @@ func spawn_mob() -> void:
 	
 		var player_position = $Player.position
 		mob.initialize(mob_spawn_location.position, player_position)
-
+		mob.squashed.connect($UserInterface/ScoreLabel.on_mob_squashed.bind())
 		# Actually spawn the mob
 		add_child(mob)
+
 
 func _on_player_hit() -> void:
 	$MobTimer.stop()
