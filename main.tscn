@@ -43,6 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 19, 0)
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_camyh")]
+collision_mask = 6
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
@@ -75,7 +76,7 @@ mesh = SubResource("CylinderMesh_qafk3")
 curve = SubResource("Curve3D_xva88")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.999996, 0, 0.00267377, 0, 1, 0, -0.00267377, 0, -0.999996, -12.966, 0, -14.0906)
+transform = Transform3D(-0.999996, 0, 0.00267473, 0, 1, 0, -0.00267473, 0, -0.999996, -12.966, 0, -14.0906)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5

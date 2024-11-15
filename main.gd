@@ -16,15 +16,19 @@ func _on_mob_timer_timeout() -> void:
 	spawn_mob()
 
 func spawn_mob() -> void:
-	var mob = mob_scene.instantiate()
+	if $Player != null:
+		var mob = mob_scene.instantiate()
 
-	# Get a random location on the spwanpath
-	var mob_spawn_location:PathFollow3D = get_node("SpawnPath/SpawnLocation")
-	# add random offset
-	mob_spawn_location.progress_ratio = randf()
+		# Get a random location on the spwanpath
+		var mob_spawn_location:PathFollow3D = get_node("SpawnPath/SpawnLocation")
+		# add random offset
+		mob_spawn_location.progress_ratio = randf()
 	
-	var player_position = $Player.position
-	mob.initialize(mob_spawn_location.position, player_position)
+		var player_position = $Player.position
+		mob.initialize(mob_spawn_location.position, player_position)
 
-	# Actually spawn the mob
-	add_child(mob)
+		# Actually spawn the mob
+		add_child(mob)
+
+func _on_player_hit() -> void:
+	$MobTimer.stop()
